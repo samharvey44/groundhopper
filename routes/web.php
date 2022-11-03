@@ -1,19 +1,41 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::middleware('throttle:60,1')->group(function () {
+    /*
+    |--------------------------------------------------------------------------
+    | Unauthed Routes
+    |--------------------------------------------------------------------------
+    */
 
-Route::get('/', function () {
-    return Inertia::render('Login');
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [LoginController::class, 'index'])->name('login.show');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authed Routes
+    |--------------------------------------------------------------------------
+    */
+
+    Route::middleware('auth')->group(function () {
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback Redirects
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/', function () {
+        return Auth::check() ? redirect()->route('home') : redirect()->route('login.show');
+    });
+
+    Route::any('{query}', function () {
+        abort_if(Auth::check(), 404);
+
+        return redirect()->route('login.show');
+    })->where('query', '.*');
 });
