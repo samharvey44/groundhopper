@@ -36,6 +36,7 @@
         "@fontsource/roboto": "^4.5.8",
         "@mui/icons-material": "^5.10.9",
         "@mui/material": "^5.10.12",
-        "notistack": "^2.0.8"
+        "notistack": "^2.0.8",
+        "yup": "^0.32.11"
     }
 }

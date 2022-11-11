@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -14,7 +15,14 @@
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
         @inertiaHead
+
+        <style>
+            body {
+                background-color: #F8F8F8;
+            }
+        </style>
     </head>
+
     <body class="font-sans antialiased">
         @inertia
     </body>

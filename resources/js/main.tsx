@@ -1,17 +1,19 @@
 import { responsiveFontSizes } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/system';
 import { SnackbarProvider } from 'notistack';
+import { ThemeProvider } from '@mui/system';
 import React from 'react';
+
+import { PRIMARY, SECONDARY } from './globals/colors';
 
 const Main = ({ children }: { children: React.ReactNode }) => {
     let theme = createTheme({
         palette: {
             primary: {
-                main: '#8F3985',
+                main: PRIMARY,
             },
             secondary: {
-                main: '#25283D',
+                main: SECONDARY,
             },
         },
     });
