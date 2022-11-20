@@ -9,10 +9,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import { PRIMARY } from './globals/colors';
 import Main from './main';
 
 const appName =
-    window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+    window.document.getElementsByTagName('title')[0]?.innerText ||
+    'Groundhopper';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -32,4 +34,4 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: '#4B5563' });
+InertiaProgress.init({ color: PRIMARY });

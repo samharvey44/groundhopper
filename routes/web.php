@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::middleware('throttle:60,1')->group(function () {
     /*
@@ -11,6 +13,11 @@ Route::middleware('throttle:60,1')->group(function () {
     */
 
     Route::middleware('guest')->group(function () {
+        Route::prefix('/signup')->group(function () {
+            Route::get('/', [SignupController::class, 'index'])->name('signup.show');
+            Route::post('/', [SignupController::class, 'signup']);
+        });
+
         Route::get('/login', [LoginController::class, 'index'])->name('login.show');
     });
 
@@ -21,6 +28,9 @@ Route::middleware('throttle:60,1')->group(function () {
     */
 
     Route::middleware('auth')->group(function () {
+        Route::get('/', function () {
+            dd('home');
+        })->name('home');
     });
 
     /*
@@ -28,10 +38,6 @@ Route::middleware('throttle:60,1')->group(function () {
     | Fallback Redirects
     |--------------------------------------------------------------------------
     */
-
-    Route::get('/', function () {
-        return Auth::check() ? redirect()->route('home') : redirect()->route('login.show');
-    });
 
     Route::any('{query}', function () {
         abort_if(Auth::check(), 404);

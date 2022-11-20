@@ -1,5 +1,6 @@
-import { PRIMARY } from 'app/globals/colors';
 import { useMemo } from 'react';
+
+import { PRIMARY } from 'app/globals/colors';
 
 export default function useStyles() {
     return useMemo(

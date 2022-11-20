@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { LoginTwoTone } from '@mui/icons-material';
+import { Link } from '@inertiajs/inertia-react';
 import React from 'react';
 
 import Container from '../components/Container';
@@ -42,9 +43,11 @@ const Login: React.FC = (): JSX.Element => {
                     </Box>
 
                     <Box sx={styles.signupLinkContainer}>
-                        <Typography variant="subtitle1" sx={styles.signupLink}>
-                            {"Haven't got an account yet? Sign up now!"}
-                        </Typography>
+                        <Link href="/signup" style={styles.inertiaLink}>
+                            <Typography variant="subtitle1">
+                                {"Haven't got an account yet? Sign up now!"}
+                            </Typography>
+                        </Link>
                     </Box>
                 </Box>
             </Box>
