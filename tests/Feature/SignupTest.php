@@ -10,6 +10,7 @@ use Database\Seeders\RoleSeeder;
 use App\Models\User;
 use App\Models\Role;
 use Tests\TestCase;
+
 use Auth;
 
 class SignupTest extends TestCase
@@ -48,9 +49,8 @@ class SignupTest extends TestCase
      */
     public function test_authenticated_user_cannot_view_signup(): void
     {
-        $this->seed(RoleSeeder::class);
-
         $user = User::factory()->make();
+
         $user->role()->associate(Role::where('name', Role::USER)->first());
         $user->save();
 
@@ -69,9 +69,10 @@ class SignupTest extends TestCase
     public function test_valid_signup_succeeds(): void
     {
         $password = $this->faker->password(8);
+        $email = $this->faker->safeEmail();
 
         $credentials = [
-            'email' => $this->faker->safeEmail(),
+            'email' => $email,
             'password' => $password,
             'password_confirmation' => $password,
         ];
@@ -80,7 +81,7 @@ class SignupTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('home'));
 
-        $this->assertTrue(auth()->check());
+        $this->assertAuthenticatedAs(User::where('email', $email)->firstOrFail());
     }
 
     /**
@@ -90,29 +91,7 @@ class SignupTest extends TestCase
      */
     public function test_invalid_signup_fails(): void
     {
-        /**
-         * Test an invalid password.
-         */
-
         $password = $this->faker->password(1, 7);
-
-        $credentials = [
-            'email' => $this->faker->safeEmail(),
-            'password' => $password,
-            'password_confirmation' => $password,
-        ];
-
-        $this->post('/signup', $credentials)
-            ->assertStatus(302)
-            ->assertSessionHasErrors('password');
-
-        $this->assertFalse(auth()->check());
-
-        /**
-         * Test an invalid email.
-         */
-
-        $password = $this->faker->password(8);
 
         $credentials = [
             'email' => 'test12345',
@@ -122,7 +101,7 @@ class SignupTest extends TestCase
 
         $this->post('/signup', $credentials)
             ->assertStatus(302)
-            ->assertSessionHasErrors('email');
+            ->assertSessionHasErrors(['email', 'password']);
 
         $this->assertFalse(auth()->check());
     }
