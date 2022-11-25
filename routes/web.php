@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 
 Route::middleware('throttle:60,1')->group(function () {
     /*
@@ -29,11 +30,10 @@ Route::middleware('throttle:60,1')->group(function () {
     | Authed Routes
     |--------------------------------------------------------------------------
     */
-
     Route::middleware('auth')->group(function () {
-        Route::get('/', function () {
-            dd('home');
-        })->name('home');
+        Route::prefix('/home')->group(function () {
+            Route::get('/', [HomeController::class, 'index'])->name('home');
+        });
     });
 
     /*
@@ -41,7 +41,6 @@ Route::middleware('throttle:60,1')->group(function () {
     | Fallback Redirects
     |--------------------------------------------------------------------------
     */
-
     Route::any('{query}', function () {
         abort_if(Auth::check(), 404);
 
