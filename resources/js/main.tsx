@@ -36,7 +36,15 @@ const Main = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>
+            <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+            >
+                {children}
+            </SnackbarProvider>
         </ThemeProvider>
     );
 };

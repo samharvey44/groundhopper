@@ -48,6 +48,18 @@ export default function useStyles() {
                 color: PRIMARY,
                 fontStyle: 'italic',
             },
+
+            rememberMeContainer: {
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-end',
+                marginTop: '10px',
+            },
+
+            rememberMe: {
+                marignLeft: '10px',
+            },
         }),
         [isMd],
     );

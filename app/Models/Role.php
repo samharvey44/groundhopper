@@ -2,27 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+use App\Models\Interfaces\IRoles;
+
+class Role extends Model implements IRoles
 {
-    /**
-     * The super admin role.
-     */
-    public const SUPER_ADMIN = 'Super Admin';
-
-    /**
-     * The admin role.
-     */
-    public const ADMIN = 'Admin';
-
-    /**
-     * The user role.
-     */
-    public const USER = 'User';
-
     /**
      * The users with this role.
      * 

@@ -1,10 +1,12 @@
 import { Box, Grid, Grow, Paper } from '@mui/material';
 import React from 'react';
 
+import useHandleInertiaMessages from 'app/hooks/handleInertiaMessages';
 import { IProps } from './interfaces';
 import useStyles from './styles';
 
 const Container: React.FC<IProps> = ({ children }): JSX.Element => {
+    useHandleInertiaMessages();
     const styles = useStyles();
 
     return (

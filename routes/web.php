@@ -14,11 +14,14 @@ Route::middleware('throttle:60,1')->group(function () {
 
     Route::middleware('guest')->group(function () {
         Route::prefix('/signup')->group(function () {
-            Route::get('/', [SignupController::class, 'index'])->name('signup.show');
+            Route::get('/', [SignupController::class, 'index'])->name('signup');
             Route::post('/', [SignupController::class, 'signup']);
         });
 
-        Route::get('/login', [LoginController::class, 'index'])->name('login.show');
+        Route::prefix('/login')->group(function () {
+            Route::get('/', [LoginController::class, 'index'])->name('login');
+            Route::post('/', [LoginController::class, 'login']);
+        });
     });
 
     /*
@@ -42,6 +45,6 @@ Route::middleware('throttle:60,1')->group(function () {
     Route::any('{query}', function () {
         abort_if(Auth::check(), 404);
 
-        return redirect()->route('login.show');
+        return redirect()->route('login');
     })->where('query', '.*');
 });

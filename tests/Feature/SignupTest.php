@@ -8,7 +8,6 @@ use Inertia\Testing\AssertableInertia;
 
 use Database\Seeders\RoleSeeder;
 use App\Models\User;
-use App\Models\Role;
 use Tests\TestCase;
 
 use Auth;
@@ -37,7 +36,7 @@ class SignupTest extends TestCase
      */
     public function test_unauthenticated_user_can_view_signup(): void
     {
-        $this->get(route('signup.show'))
+        $this->get(route('signup'))
             ->assertStatus(200)
             ->assertInertia(fn (AssertableInertia $page) => $page->component('Unauthed/Signup', false));
     }
@@ -49,14 +48,9 @@ class SignupTest extends TestCase
      */
     public function test_authenticated_user_cannot_view_signup(): void
     {
-        $user = User::factory()->make();
+        Auth::login($this->createTestUser());
 
-        $user->role()->associate(Role::where('name', Role::USER)->first());
-        $user->save();
-
-        Auth::login($user);
-
-        $this->get(route('signup.show'))
+        $this->get(route('signup'))
             ->assertStatus(302)
             ->assertRedirect('home');
     }
@@ -103,6 +97,6 @@ class SignupTest extends TestCase
             ->assertStatus(302)
             ->assertSessionHasErrors(['email', 'password']);
 
-        $this->assertFalse(auth()->check());
+        $this->assertGuest();
     }
 }
