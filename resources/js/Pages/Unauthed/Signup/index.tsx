@@ -31,7 +31,7 @@ const Signup: React.FC = (): JSX.Element => {
     return (
         <Container>
             <Box sx={styles.innerContainer}>
-                <Typography variant="h2">Sign up</Typography>
+                <Typography variant="h3">Sign up</Typography>
                 <Typography variant="subtitle1">
                     Start tracking your stadium visits now.
                 </Typography>

@@ -1,7 +1,13 @@
-import { PRIMARY } from 'app/globals/colors';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 
+import { PRIMARY } from 'app/globals/colors';
+
 export default function useStyles() {
+    const theme = useTheme();
+
+    const isMd = useMediaQuery(theme.breakpoints.down('md'));
+
     return useMemo(
         () => ({
             innerContainer: {
@@ -15,7 +21,7 @@ export default function useStyles() {
 
             formContainer: {
                 marginTop: '20px',
-                width: '70%',
+                width: isMd ? '85%' : '70%',
             },
 
             password: {
@@ -43,6 +49,6 @@ export default function useStyles() {
                 fontStyle: 'italic',
             },
         }),
-        [],
+        [isMd],
     );
 }

@@ -12,7 +12,7 @@ const Login: React.FC = (): JSX.Element => {
     return (
         <Container>
             <Box sx={styles.innerContainer}>
-                <Typography variant="h2">Groundhopper</Typography>
+                <Typography variant="h3">Groundhopper</Typography>
                 <Typography variant="subtitle1">
                     Track your journey to reaching the 92.
                 </Typography>

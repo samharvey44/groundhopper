@@ -1,4 +1,4 @@
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Grid, Grow, Paper } from '@mui/material';
 import React from 'react';
 
 import { IProps } from './interfaces';
@@ -8,15 +8,17 @@ const Container: React.FC<IProps> = ({ children }): JSX.Element => {
     const styles = useStyles();
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={12}>
-                <Box sx={styles.mainContainer}>
-                    <Box sx={styles.innerMainContainer}>
-                        <Paper sx={styles.mainPaper}>{children}</Paper>
+        <Grow in>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Box sx={styles.mainContainer}>
+                        <Box sx={styles.innerMainContainer}>
+                            <Paper sx={styles.mainPaper}>{children}</Paper>
+                        </Box>
                     </Box>
-                </Box>
+                </Grid>
             </Grid>
-        </Grid>
+        </Grow>
     );
 };
 
