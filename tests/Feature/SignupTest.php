@@ -18,11 +18,23 @@ class SignupTest extends TestCase
     use WithFaker;
 
     /**
+     * Set up this test class.
+     * 
+     * @return void
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(RoleSeeder::class);
+    }
+
+    /**
      * Test that an unauthenticated user can view the signup page.
      *
      * @return void
      */
-    public function test_unauthenticated_user_can_view_signup()
+    public function test_unauthenticated_user_can_view_signup(): void
     {
         $this->get(route('signup.show'))
             ->assertStatus(200)
@@ -34,7 +46,7 @@ class SignupTest extends TestCase
      *
      * @return void
      */
-    public function test_authenticated_user_cannot_view_signup()
+    public function test_authenticated_user_cannot_view_signup(): void
     {
         $this->seed(RoleSeeder::class);
 
@@ -54,10 +66,8 @@ class SignupTest extends TestCase
      *
      * @return void
      */
-    public function test_valid_signup_succeeds()
+    public function test_valid_signup_succeeds(): void
     {
-        $this->seed(RoleSeeder::class);
-
         $password = $this->faker->password(8);
 
         $credentials = [
@@ -78,10 +88,8 @@ class SignupTest extends TestCase
      *
      * @return void
      */
-    public function test_invalid_signup_fails()
+    public function test_invalid_signup_fails(): void
     {
-        $this->seed(RoleSeeder::class);
-
         /**
          * Test an invalid password.
          */
