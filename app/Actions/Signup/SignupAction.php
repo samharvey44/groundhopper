@@ -24,7 +24,7 @@ class SignupAction
         ]);
 
         $user->forceFill(['password' => Hash::make($password)]);
-        $user->role()->associate(Role::where('name', Role::USER)->first());
+        $user->role()->associate(Role::firstWhere('name', Role::USER));
 
         $user->save();
 

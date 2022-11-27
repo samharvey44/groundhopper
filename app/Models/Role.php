@@ -10,6 +10,15 @@ use App\Models\Interfaces\IRoles;
 class Role extends Model implements IRoles
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
      * The users with this role.
      * 
      * @return HasMany

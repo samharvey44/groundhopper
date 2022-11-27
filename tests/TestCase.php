@@ -14,13 +14,15 @@ abstract class TestCase extends BaseTestCase
     /**
      * Create a test user.
      * 
+     * @param string $role The role to give the created user.
+     * 
      * @return User
      */
-    public function createTestUser(): User
+    public function createTestUser(string $role = Role::USER): User
     {
         $user = User::factory()->make();
 
-        $user->role()->associate(Role::where('name', Role::USER)->first());
+        $user->role()->associate(Role::firstWhere('name', $role));
         $user->save();
 
         return $user;

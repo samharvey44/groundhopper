@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $user = User::make(['email' => config('users.super_user_email')]);
 
         $user->forceFill(['password' => Hash::make(config('users.super_user_password'))]);
-        $user->role()->associate(Role::where('name', Role::SUPER_ADMIN)->first());
+        $user->role()->associate(Role::firstWhere('name', Role::SUPER_ADMIN));
 
         $user->save();
     }

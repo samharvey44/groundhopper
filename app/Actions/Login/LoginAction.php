@@ -14,6 +14,9 @@ class LoginAction
      */
     public function __invoke(string $email, string $password, bool $rememberMe): bool
     {
-        return auth()->attempt(['email' => $email, 'password' => $password], $rememberMe);
+        return auth()->attempt([
+            'email' => $email,
+            'password' => $password,
+        ], $rememberMe);
     }
 }
