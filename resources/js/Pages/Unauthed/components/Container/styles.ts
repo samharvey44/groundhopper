@@ -1,11 +1,9 @@
-import { useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/system';
 import { useMemo } from 'react';
 
-export default function useStyles() {
-    const theme = useTheme();
+import useIsMediumScreen from 'app/hooks/isMediumScreen';
 
-    const isMd = useMediaQuery(theme.breakpoints.down('md'));
+export default function useStyles() {
+    const isMd = useIsMediumScreen();
 
     return useMemo(
         () => ({

@@ -19,6 +19,7 @@
         <style>
             body {
                 background-color: #F8F8F8;
+                margin: 0;
             }
         </style>
     </head>
