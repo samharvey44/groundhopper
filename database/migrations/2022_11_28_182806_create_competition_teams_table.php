@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\Continent;
+use App\Models\Competition;
+use App\Models\Team;
 
 return new class extends Migration
 {
@@ -15,14 +16,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('competition_teams', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
 
-            $table->string('name');
-            $table->smallInteger('order');
-
-            $table->foreignIdFor(Continent::class);
+            $table->foreignIdFor(Competition::class);
+            $table->foreignIdFor(Team::class);
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('competition_teams');
     }
 };
