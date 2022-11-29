@@ -5,6 +5,12 @@ export interface IUser {
     email?: string;
 }
 
+export interface IBreadcrumb {
+    name: string;
+    url: string;
+    activePage: boolean;
+}
+
 export interface IInertiaProps extends Page<PageProps> {
     props: {
         errors: Errors & ErrorBag;
@@ -12,5 +18,6 @@ export interface IInertiaProps extends Page<PageProps> {
             user?: IUser;
         };
         successMessage?: string;
+        breadcrumbs: IBreadcrumb[];
     };
 }
