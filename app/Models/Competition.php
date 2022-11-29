@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Traits\HasBadge;
 
@@ -41,5 +40,25 @@ class Competition extends Model
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'competition_teams', 'competition_id', 'team_id');
+    }
+
+    /**
+     * The country this competition is within.
+     * 
+     * @return BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    /**
+     * The continent this competition is within.
+     * 
+     * @return BelongsTo
+     */
+    public function continent(): BelongsTo
+    {
+        return $this->belongsTo(Continent::class, 'country_id');
     }
 }

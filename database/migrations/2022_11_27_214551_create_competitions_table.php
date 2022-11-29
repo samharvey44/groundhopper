@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 use App\Models\CompetitionType;
+use App\Models\Continent;
 use App\Models\Country;
 
 return new class extends Migration
@@ -23,8 +24,10 @@ return new class extends Migration
             $table->string('name');
             $table->smallInteger('order');
 
+            $table->foreignIdFor(Country::class)->nullable();
+            $table->foreignIdFor(Continent::class)->nullable();
+
             $table->foreignIdFor(CompetitionType::class);
-            $table->foreignIdFor(Country::class);
         });
     }
 

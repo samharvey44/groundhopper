@@ -41,4 +41,14 @@ class Country extends Model
     {
         return $this->belongsTo(Continent::class, 'continent_id');
     }
+
+    /**
+     * The competitions within this country.
+     * 
+     * @return HasMany
+     */
+    public function competitions(): HasMany
+    {
+        return $this->hasMany(Competition::class, 'country_id');
+    }
 }

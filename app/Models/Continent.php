@@ -40,4 +40,14 @@ class Continent extends Model
     {
         return $this->hasManyThrough(Team::class, Country::class, 'continent_id', 'country_id');
     }
+
+    /**
+     * The competitions within this continent.
+     * 
+     * @return HasMany
+     */
+    public function competitions(): HasMany
+    {
+        return $this->hasMany(Competition::class, 'continent_id');
+    }
 }
