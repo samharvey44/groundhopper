@@ -21,7 +21,7 @@ class CompetitionType extends Model
      * 
      * @return HasMany
      */
-    public function competition(): HasMany
+    public function competitions(): HasMany
     {
         return $this->hasMany(Competition::class, 'competition_type_id');
     }
