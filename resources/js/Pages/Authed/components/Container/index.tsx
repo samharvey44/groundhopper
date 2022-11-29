@@ -64,24 +64,33 @@ const Container: React.FC<IProps> = ({ children }): JSX.Element => {
                     </Box>
                 )}
 
-                <List>
-                    {Object.entries({
-                        Home: Home,
-                    }).map(([itemName, Icon]) => (
-                        <ListItem key={itemName} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Icon />
-                                </ListItemIcon>
+                <Box sx={styles.drawerListContainer}>
+                    <List sx={styles.drawerList}>
+                        {Object.entries({
+                            Home: Home,
+                        }).map(([itemName, Icon]) => (
+                            <ListItem key={itemName} disablePadding>
+                                <ListItemButton sx={styles.listItemButton}>
+                                    <ListItemIcon>
+                                        <Icon />
+                                    </ListItemIcon>
 
-                                <ListItemText primary={itemName} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                                    <ListItemText primary={itemName} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
             </Fragment>
         ),
-        [isMd, styles.appbarTitle, styles.drawerHeader],
+        [
+            isMd,
+            styles.appbarTitle,
+            styles.drawerHeader,
+            styles.drawerList,
+            styles.drawerListContainer,
+            styles.listItemButton,
+        ],
     );
 
     useEffect(() => {
@@ -91,7 +100,7 @@ const Container: React.FC<IProps> = ({ children }): JSX.Element => {
     return (
         <Box sx={styles.root}>
             <AppBar
-                position="static"
+                position="fixed"
                 sx={isMd ? styles.appBarMd : styles.appBar}
             >
                 <Toolbar>
@@ -137,7 +146,7 @@ const Container: React.FC<IProps> = ({ children }): JSX.Element => {
                 {drawerList}
             </Drawer>
 
-            <Box>{children}</Box>
+            <Box sx={styles.pageContentContainer}>{children}</Box>
         </Box>
     );
 };

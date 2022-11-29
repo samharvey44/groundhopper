@@ -6,7 +6,7 @@ import { PRIMARY } from 'app/globals/colors';
 export default function useStyles() {
     const isMd = useIsMediumScreen();
 
-    const drawerWidth = 250;
+    const drawerWidth = 230;
     const appbarHeight = 65;
 
     return useMemo(
@@ -20,11 +20,12 @@ export default function useStyles() {
                 width: `calc(100% - ${drawerWidth}px)`,
                 marginLeft: `${drawerWidth}px`,
                 height: `${appbarHeight}px`,
-                boxShadow: 'none',
+                boxShadow: '0px 3px 20px 0px rgba(0,0,0,0.2)',
             },
 
             appBarMd: {
                 width: '100%',
+                boxShadow: '0px 3px 20px 0px rgba(0,0,0,0.2)',
             },
 
             appbarTitle: {
@@ -49,6 +50,25 @@ export default function useStyles() {
                 alignItems: 'center',
                 flexDirection: 'column',
                 borderRight: 'none',
+                overflow: 'visible',
+            },
+
+            drawerListContainer: {
+                width: '100%',
+                display: 'flex',
+                flex: 1,
+                boxShadow: '3px 0px 20px 0px rgba(0,0,0,0.1)',
+                flexDirection: 'column',
+                alignItems: 'center',
+            },
+
+            drawerList: {
+                width: '100%',
+            },
+
+            listItemButton: {
+                paddingLeft: '30px',
+                paddingRight: '30px',
             },
 
             appbarStartContainer: {
@@ -67,6 +87,14 @@ export default function useStyles() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+            },
+
+            pageContentContainer: {
+                marginLeft: `${drawerWidth}px`,
+                padding: '25px 40px 25px 40px',
+                overflowY: 'scroll',
+                marginTop: `${appbarHeight}px`,
+                height: `calc(100vh - ${appbarHeight}px - 50px)`,
             },
         }),
         [drawerWidth],
