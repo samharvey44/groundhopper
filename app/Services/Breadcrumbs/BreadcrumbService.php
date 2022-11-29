@@ -36,7 +36,7 @@ class BreadcrumbService
     {
         return [
             'home' => [
-                self::breadcrumbPartition('Home', route('home', Request::route()->parameters()), true),
+                self::breadcrumbPartition('Home', route('home'), true),
             ],
         ];
     }
