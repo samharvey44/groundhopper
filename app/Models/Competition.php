@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Traits\HasBadge;
@@ -20,6 +21,16 @@ class Competition extends Model
     protected $fillable = [
         'name',
         'order',
+        'active',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     * 
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'active' => 'boolean',
     ];
 
     /**
@@ -60,5 +71,15 @@ class Competition extends Model
     public function continent(): BelongsTo
     {
         return $this->belongsTo(Continent::class, 'country_id');
+    }
+
+    /**
+     * The visits for this competition.
+     * 
+     * @return HasMany
+     */
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'competition_id');
     }
 }

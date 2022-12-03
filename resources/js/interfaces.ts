@@ -8,7 +8,7 @@ export interface IUser {
 export interface IBreadcrumb {
     name: string;
     url: string;
-    activePage: boolean;
+    isActive: boolean;
 }
 
 export interface IInertiaProps extends Page<PageProps> {

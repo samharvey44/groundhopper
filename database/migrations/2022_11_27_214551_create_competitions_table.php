@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->smallInteger('order');
+            $table->boolean('active')->default(true);
 
             $table->foreignIdFor(Country::class)->nullable();
             $table->foreignIdFor(Continent::class)->nullable();

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('formation_date');
             $table->string('description');
             $table->boolean('is_international')->default(false);
+            $table->boolean('active')->default(true);
 
             $table->foreignIdFor(Country::class);
         });

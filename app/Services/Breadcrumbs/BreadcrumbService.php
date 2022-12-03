@@ -2,8 +2,6 @@
 
 namespace App\Services\Breadcrumbs;
 
-use Request;
-
 class BreadcrumbService
 {
     /**

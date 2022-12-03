@@ -48,4 +48,14 @@ class Venue extends Model
     {
         return $this->morphOne(Image::class, 'picture');
     }
+
+    /**
+     * The visits at this venue.
+     * 
+     * @return HasMany
+     */
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'venue_id');
+    }
 }

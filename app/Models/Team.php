@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Traits\HasBadge;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Team extends Model
 {
@@ -23,6 +23,7 @@ class Team extends Model
         'formation_date',
         'description',
         'is_international',
+        'active',
     ];
 
     /**
@@ -32,6 +33,7 @@ class Team extends Model
      */
     protected $casts = [
         'is_international' => 'boolean',
+        'active' => 'boolean',
     ];
 
     /**
@@ -62,5 +64,25 @@ class Team extends Model
     public function teamVenues(): HasMany
     {
         return $this->hasMany(TeamVenue::class, 'team_id');
+    }
+
+    /**
+     * The visits for this team as the home side.
+     * 
+     * @return HasMany
+     */
+    public function homeTeamVisits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'home_team_id');
+    }
+
+    /**
+     * The visits for this team as the away side.
+     * 
+     * @return HasMany
+     */
+    public function awayTeamVisits(): HasMany
+    {
+        return $this->hasMany(Visit::class, 'away_team_id');
     }
 }

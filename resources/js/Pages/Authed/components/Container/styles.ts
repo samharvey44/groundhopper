@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import useIsMediumScreen from 'app/hooks/isMediumScreen';
-import { PRIMARY } from 'app/globals/colors';
+import { PRIMARY, SECONDARY } from 'app/globals/colors';
 
 export default function useStyles() {
     const isMd = useIsMediumScreen();
@@ -90,13 +90,17 @@ export default function useStyles() {
             },
 
             pageContentContainer: {
-                marginLeft: `${drawerWidth}px`,
+                marginLeft: isMd ? '0px' : `${drawerWidth}px`,
                 padding: '25px 40px 25px 40px',
                 overflowY: 'scroll',
                 marginTop: `${appbarHeight}px`,
                 height: `calc(100vh - ${appbarHeight}px - 50px)`,
             },
+
+            drawerItemText: {
+                color: SECONDARY,
+            },
         }),
-        [drawerWidth],
+        [isMd],
     );
 }

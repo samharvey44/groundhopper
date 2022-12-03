@@ -14,14 +14,13 @@ import {
 } from '@mui/material';
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { Home, Logout, Menu } from '@mui/icons-material';
-import { usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
 
 import useHandleInertiaMessages from 'app/hooks/handleInertiaMessages';
+import BreadcrumbsContainer from './components/BreadcrumbsContainer';
 import useIsMediumScreen from 'app/hooks/isMediumScreen';
-import { IInertiaProps } from 'app/interfaces';
 import { IProps } from './interfaces';
 import useStyles from './styles';
 
@@ -34,9 +33,6 @@ const Container: React.FC<IProps> = ({
     useHandleInertiaMessages();
     const styles = useStyles();
     const isMd = useIsMediumScreen();
-    const {
-        props: { breadcrumbs },
-    } = usePage<IInertiaProps>();
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -61,6 +57,13 @@ const Container: React.FC<IProps> = ({
         setDrawerOpen((curr) => !curr);
     };
 
+    const drawerMap = useMemo(
+        () => ({
+            Home: Home,
+        }),
+        [],
+    );
+
     const drawerList = useMemo(
         () => (
             <Fragment>
@@ -74,16 +77,23 @@ const Container: React.FC<IProps> = ({
 
                 <Box sx={styles.drawerListContainer}>
                     <List sx={styles.drawerList}>
-                        {Object.entries({
-                            Home: Home,
-                        }).map(([itemName, Icon]) => (
+                        {Object.entries(drawerMap).map(([itemName, Icon]) => (
                             <ListItem key={itemName} disablePadding>
                                 <ListItemButton sx={styles.listItemButton}>
                                     <ListItemIcon>
                                         <Icon color="secondary" />
                                     </ListItemIcon>
 
-                                    <ListItemText primary={itemName} />
+                                    <ListItemText
+                                        primary={
+                                            <Typography
+                                                variant="h6"
+                                                sx={styles.drawerItemText}
+                                            >
+                                                Home
+                                            </Typography>
+                                        }
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         ))}
@@ -92,9 +102,11 @@ const Container: React.FC<IProps> = ({
             </Fragment>
         ),
         [
+            drawerMap,
             isMd,
             styles.appbarTitle,
             styles.drawerHeader,
+            styles.drawerItemText,
             styles.drawerList,
             styles.drawerListContainer,
             styles.listItemButton,
@@ -149,7 +161,11 @@ const Container: React.FC<IProps> = ({
                 {drawerList}
             </Drawer>
 
-            <Box sx={styles.pageContentContainer}>{children}</Box>
+            <Box sx={styles.pageContentContainer}>
+                {!hideBreadcrumbs && <BreadcrumbsContainer />}
+
+                {children}
+            </Box>
         </Box>
     );
 };
