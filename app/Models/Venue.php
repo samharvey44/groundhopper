@@ -46,7 +46,7 @@ class Venue extends Model
      */
     public function picture(): MorphOne
     {
-        return $this->morphOne(Image::class, 'picture');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     /**

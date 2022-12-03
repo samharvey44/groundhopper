@@ -35,7 +35,7 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::post('/logout', LogoutController::class);
 
         Route::prefix('/home')->group(function () {
-            Route::get('/', [HomeController::class, 'index'])->name('home');
+            Route::get('/', HomeController::class)->name('home');
         });
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Home\ObtainHomeDataAction;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
@@ -13,8 +14,8 @@ class HomeController extends Controller
      * 
      * @return Response
      */
-    public function index(Request $request): Response
+    public function __invoke(Request $request, ObtainHomeDataAction $action): Response
     {
-        return Inertia::render('Authed/Home');
+        return Inertia::render('Authed/Home', $action());
     }
 }

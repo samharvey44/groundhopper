@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
@@ -75,5 +76,15 @@ class Visit extends Model
     public function awayTeam(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'away_team_id');
+    }
+
+    /**
+     * The uploaded pictures for this visit.
+     * 
+     * @return MorphMany
+     */
+    public function picture(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

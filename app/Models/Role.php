@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Classes\BaseRoleModel;
 
-use App\Models\Interfaces\IRoles;
-
-class Role extends Model implements IRoles
+class Role extends BaseRoleModel
 {
     /**
      * The attributes that are mass assignable.

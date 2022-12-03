@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models\Interfaces;
+namespace App\Models\Classes;
 
-interface IRoles
+use Illuminate\Database\Eloquent\Model;
+
+abstract class BaseRoleModel extends Model
 {
     /**
      * The super admin role.
