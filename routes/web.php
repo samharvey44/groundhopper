@@ -44,6 +44,10 @@ Route::middleware('throttle:60,1')->group(function () {
     | Fallback Redirects
     |--------------------------------------------------------------------------
     */
+    Route::get('/', function () {
+        return redirect()->route(Auth::check() ? 'home' : 'login');
+    });
+
     Route::any('{query}', function () {
         abort_if(Auth::check(), 404);
 
