@@ -27,8 +27,7 @@ class ObtainHomeDataAction
             ->where('is_current', true)
             ->with('venue')
             ->get()
-            ->map(fn ($tv) => $tv->venue)
-            ->map(fn ($v) => $v->id)
+            ->map(fn ($tv) => $tv->venue->id)
             ->toArray();
 
         $userVisits = Auth::user()->visits;
@@ -40,7 +39,7 @@ class ObtainHomeDataAction
 
         return [
             'englishVisits' => $userEnglishVenueVisits,
-            'averageVisitRating' => number_format($userVisits->avg('rating'), 2),
+            'averageVisitRating' => round($userVisits->avg('rating'), 2),
             'totalVisits' => $userVisits->count(),
         ];
     }
