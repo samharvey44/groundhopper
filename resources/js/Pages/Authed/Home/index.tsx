@@ -1,11 +1,16 @@
 import { ReceiptLong, Stadium, Stars } from '@mui/icons-material';
 import { Grid, Paper, Typography } from '@mui/material';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import Container from '../components/Container';
+import { IProps } from './interfaces';
 import useStyles from './styles';
 
-const Home: React.FC = (): JSX.Element => {
+const Home: React.FC<IProps> = ({
+    englishVisits,
+    averageVisitRating,
+    totalVisits,
+}): JSX.Element => {
     const styles = useStyles();
 
     return (
@@ -16,7 +21,7 @@ const Home: React.FC = (): JSX.Element => {
                         <Stadium color="primary" sx={styles.homeIcon} />
 
                         <Typography variant="h4" sx={styles.homeText}>
-                            <b>41</b> of 92 Visited
+                            <b>{englishVisits}</b> of 92 Visited
                         </Typography>
                     </Paper>
                 </Grid>
@@ -26,7 +31,14 @@ const Home: React.FC = (): JSX.Element => {
                         <Stars color="primary" sx={styles.homeIcon} />
 
                         <Typography variant="h4" sx={styles.homeText}>
-                            <b>4.24</b> Average Visit Rating
+                            {totalVisits > 0 ? (
+                                <Fragment>
+                                    <b>{averageVisitRating}</b> Average Visit
+                                    Rating
+                                </Fragment>
+                            ) : (
+                                <Fragment>No Average Rating Yet!</Fragment>
+                            )}
                         </Typography>
                     </Paper>
                 </Grid>
@@ -36,7 +48,7 @@ const Home: React.FC = (): JSX.Element => {
                         <ReceiptLong color="primary" sx={styles.homeIcon} />
 
                         <Typography variant="h4" sx={styles.homeText}>
-                            <b>67</b> Total Visits Recorded
+                            <b>{totalVisits}</b> Total Visits Recorded
                         </Typography>
                     </Paper>
                 </Grid>

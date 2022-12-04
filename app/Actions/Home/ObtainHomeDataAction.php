@@ -2,6 +2,12 @@
 
 namespace App\Actions\Home;
 
+use App\Models\Competition;
+use App\Models\TeamVenue;
+use App\Models\Venue;
+
+use Auth;
+
 class ObtainHomeDataAction
 {
     /**
@@ -11,6 +17,31 @@ class ObtainHomeDataAction
      */
     public function __invoke(): array
     {
-        return [];
+        Auth::user()->load('visits.venue');
+
+        $englishVenuesIds = TeamVenue::whereHas('team', function ($sq) {
+            $sq->whereHas('competitions', function ($ssq) {
+                $ssq->whereIn('name', Competition::ENGLISH_LEAGUES);
+            });
+        })
+            ->where('is_current', true)
+            ->with('venue')
+            ->get()
+            ->map(fn ($tv) => $tv->venue)
+            ->map(fn ($v) => $v->id)
+            ->toArray();
+
+        $userVisits = Auth::user()->visits;
+
+        $userEnglishVenueVisits = $userVisits
+            ->map(fn ($v) => $v->venue)
+            ->filter(fn ($v) => in_array($v->id, $englishVenuesIds))
+            ->count();
+
+        return [
+            'englishVisits' => $userEnglishVenueVisits,
+            'averageVisitRating' => number_format($userVisits->avg('rating'), 2),
+            'totalVisits' => $userVisits->count(),
+        ];
     }
 }

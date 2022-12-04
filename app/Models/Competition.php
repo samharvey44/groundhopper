@@ -14,6 +14,16 @@ class Competition extends Model
     use HasBadge;
 
     /**
+     * The English leagues.
+     */
+    public const ENGLISH_LEAGUES = [
+        'Premier League',
+        'Championship',
+        'League One',
+        'League Two',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

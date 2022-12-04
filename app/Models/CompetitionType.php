@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Model;
 
-class CompetitionType extends Model
+use App\Models\Classes\BaseCompetitionTypeModel;
+
+class CompetitionType extends BaseCompetitionTypeModel
 {
     /**
      * The attributes that are mass assignable.
