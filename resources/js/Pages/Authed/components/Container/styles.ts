@@ -91,14 +91,20 @@ export default function useStyles() {
 
             pageContentContainer: {
                 marginLeft: isMd ? '0px' : `${drawerWidth}px`,
-                padding: '25px 40px 25px 40px',
+                padding: '25px 40px 0px 40px',
                 overflowY: 'scroll',
                 marginTop: `${appbarHeight}px`,
-                height: `calc(100vh - ${appbarHeight}px - 50px)`,
+                height: `calc(100vh - ${appbarHeight}px - 25px)`,
+                display: 'flex',
+                flexDirection: 'column',
             },
 
             drawerItemText: {
                 color: SECONDARY,
+            },
+
+            innerContentContainer: {
+                flex: 1,
             },
         }),
         [isMd],

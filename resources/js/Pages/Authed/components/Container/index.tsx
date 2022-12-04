@@ -164,7 +164,7 @@ const Container: React.FC<IProps> = ({
             <Box sx={styles.pageContentContainer}>
                 {!hideBreadcrumbs && <BreadcrumbsContainer />}
 
-                {children}
+                <Box sx={styles.innerContentContainer}>{children}</Box>
             </Box>
         </Box>
     );
