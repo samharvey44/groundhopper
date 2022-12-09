@@ -38,6 +38,7 @@ const Container: React.FC<IProps> = ({
     children,
 }): JSX.Element => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [loggingOut, setLoggingOut] = useState(false);
 
     useHandleInertiaMessages();
     const styles = useStyles();
@@ -47,6 +48,8 @@ const Container: React.FC<IProps> = ({
     const { enqueueSnackbar } = useSnackbar();
 
     const handleLogout = () => {
+        setLoggingOut(true);
+
         axios
             .post('/logout')
             .then(() => {
@@ -60,6 +63,8 @@ const Container: React.FC<IProps> = ({
                 enqueueSnackbar('Failed to logout!', {
                     variant: 'error',
                 });
+
+                setLoggingOut(false);
             });
     };
 
@@ -200,6 +205,7 @@ const Container: React.FC<IProps> = ({
                                 variant="contained"
                                 startIcon={isMd ? undefined : <Logout />}
                                 onClick={handleLogout}
+                                disabled={loggingOut}
                             >
                                 {isMd ? <Logout /> : 'Logout'}
                             </Button>
