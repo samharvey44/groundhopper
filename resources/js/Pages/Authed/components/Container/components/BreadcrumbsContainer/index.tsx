@@ -27,7 +27,9 @@ const BreadcrumbsContainer: React.FC = (): JSX.Element => {
                         </Typography>
                     ) : (
                         <Link key={url} style={styles.inertiaLink} href={url}>
-                            <Typography variant="subtitle1">{name}</Typography>
+                            <Typography variant="subtitle1">
+                                <b>{name}</b>
+                            </Typography>
                         </Link>
                     )}
 

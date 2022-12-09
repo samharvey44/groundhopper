@@ -9,7 +9,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { PRIMARY } from './globals/colors';
 import Main from './main';
 
 const appName =
@@ -34,4 +33,4 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: PRIMARY });
+InertiaProgress.init({ color: '#87CBAC' });

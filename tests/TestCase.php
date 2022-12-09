@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\Profile;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 use App\Models\Role;
@@ -24,6 +25,11 @@ abstract class TestCase extends BaseTestCase
 
         $user->role()->associate(Role::firstWhere('name', $role));
         $user->save();
+
+        $profile = Profile::factory()->make();
+
+        $profile->user()->associate($user);
+        $profile->save();
 
         return $user;
     }

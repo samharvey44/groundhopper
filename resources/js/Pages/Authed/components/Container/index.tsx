@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Drawer,
+    Grow,
     IconButton,
     List,
     ListItem,
@@ -13,7 +14,13 @@ import {
     Typography,
 } from '@mui/material';
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
-import { Home, Logout, Menu } from '@mui/icons-material';
+import {
+    AdminPanelSettings,
+    Home,
+    Logout,
+    Menu,
+    Person,
+} from '@mui/icons-material';
 import { Inertia } from '@inertiajs/inertia';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
@@ -21,7 +28,9 @@ import axios from 'axios';
 import useHandleInertiaMessages from 'app/hooks/handleInertiaMessages';
 import BreadcrumbsContainer from './components/BreadcrumbsContainer';
 import useIsMediumScreen from 'app/hooks/isMediumScreen';
+import useGetAuthedUser from 'app/hooks/getAuthedUser';
 import { IProps } from './interfaces';
+import { ERole } from 'app/enums';
 import useStyles from './styles';
 
 const Container: React.FC<IProps> = ({
@@ -33,6 +42,7 @@ const Container: React.FC<IProps> = ({
     useHandleInertiaMessages();
     const styles = useStyles();
     const isMd = useIsMediumScreen();
+    const authedUser = useGetAuthedUser();
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -59,7 +69,23 @@ const Container: React.FC<IProps> = ({
 
     const drawerMap = useMemo(
         () => ({
-            Home: Home,
+            Home: {
+                Icon: Home,
+                endpoint: '/home',
+                roles: [],
+            },
+
+            Profile: {
+                Icon: Person,
+                endpoint: '/profile',
+                roles: [],
+            },
+
+            Admin: {
+                Icon: AdminPanelSettings,
+                endpoint: '/admin',
+                roles: [ERole.SUPER_ADMIN, ERole.ADMIN],
+            },
         }),
         [],
     );
@@ -77,36 +103,71 @@ const Container: React.FC<IProps> = ({
 
                 <Box sx={styles.drawerListContainer}>
                     <List sx={styles.drawerList}>
-                        {Object.entries(drawerMap).map(([itemName, Icon]) => (
-                            <ListItem key={itemName} disablePadding>
-                                <ListItemButton sx={styles.listItemButton}>
-                                    <ListItemIcon>
-                                        <Icon color="secondary" />
-                                    </ListItemIcon>
+                        {Object.entries(drawerMap).map(
+                            ([itemName, { Icon, endpoint, roles }]) => {
+                                const isCurrentPath =
+                                    window.location.pathname === endpoint;
 
-                                    <ListItemText
-                                        primary={
-                                            <Typography
-                                                variant="h6"
-                                                sx={styles.drawerItemText}
-                                            >
-                                                Home
-                                            </Typography>
-                                        }
-                                    />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                                const userHasRole = Boolean(
+                                    roles.length
+                                        ? roles.filter(
+                                              (r) =>
+                                                  r === authedUser?.role.name,
+                                          ).length
+                                        : true,
+                                );
+
+                                return userHasRole ? (
+                                    <ListItem key={itemName} disablePadding>
+                                        <ListItemButton
+                                            sx={styles.listItemButton}
+                                            onClick={() => {
+                                                if (!isCurrentPath) {
+                                                    Inertia.visit(endpoint);
+                                                }
+                                            }}
+                                        >
+                                            <ListItemIcon>
+                                                <Icon
+                                                    color={
+                                                        isCurrentPath
+                                                            ? 'primary'
+                                                            : 'secondary'
+                                                    }
+                                                />
+                                            </ListItemIcon>
+
+                                            <ListItemText
+                                                primary={
+                                                    <Typography
+                                                        variant="h6"
+                                                        sx={
+                                                            isCurrentPath
+                                                                ? styles.drawerItemTextActive
+                                                                : styles.drawerItemText
+                                                        }
+                                                    >
+                                                        {itemName}
+                                                    </Typography>
+                                                }
+                                            />
+                                        </ListItemButton>
+                                    </ListItem>
+                                ) : null;
+                            },
+                        )}
                     </List>
                 </Box>
             </Fragment>
         ),
         [
+            authedUser?.role.name,
             drawerMap,
             isMd,
             styles.appbarTitle,
             styles.drawerHeader,
             styles.drawerItemText,
+            styles.drawerItemTextActive,
             styles.drawerList,
             styles.drawerListContainer,
             styles.listItemButton,
@@ -161,11 +222,13 @@ const Container: React.FC<IProps> = ({
                 {drawerList}
             </Drawer>
 
-            <Box sx={styles.pageContentContainer}>
-                {!hideBreadcrumbs && <BreadcrumbsContainer />}
+            <Grow in>
+                <Box sx={styles.pageContentContainer}>
+                    {!hideBreadcrumbs && <BreadcrumbsContainer />}
 
-                <Box sx={styles.innerContentContainer}>{children}</Box>
-            </Box>
+                    <Box sx={styles.innerContentContainer}>{children}</Box>
+                </Box>
+            </Grow>
         </Box>
     );
 };

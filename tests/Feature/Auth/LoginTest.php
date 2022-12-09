@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Inertia\Testing\AssertableInertia;
 
-use Database\Seeders\RoleSeeder;
+use Tests\Traits\SeedsRoles;
 use Tests\TestCase;
 
 use Auth;
@@ -14,19 +14,8 @@ use Auth;
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
+    use SeedsRoles;
     use WithFaker;
-
-    /**
-     * Set up this test class.
-     * 
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->seed(RoleSeeder::class);
-    }
 
     /**
      * Test that an unauthenticated user can view the login page.

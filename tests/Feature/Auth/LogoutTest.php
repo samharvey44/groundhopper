@@ -4,7 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use Database\Seeders\RoleSeeder;
+use Tests\Traits\SeedsRoles;
 use Tests\TestCase;
 
 use Auth;
@@ -12,18 +12,7 @@ use Auth;
 class LogoutTest extends TestCase
 {
     use RefreshDatabase;
-
-    /**
-     * Set up this test class.
-     * 
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->seed(RoleSeeder::class);
-    }
+    use SeedsRoles;
 
     /**
      * Test that an authorized user can logout.

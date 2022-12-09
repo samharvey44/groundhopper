@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -43,6 +44,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The relations to eager load.
+     * 
+     * @var array<int, string>
+     */
+    protected $with = [
+        'role',
+    ];
+
+    /**
      * Return whether this user has one of the specified roles.
      * 
      * @param string|array $role
@@ -76,5 +86,15 @@ class User extends Authenticatable
     public function visits(): HasMany
     {
         return $this->hasMany(Visit::class, 'user_id');
+    }
+
+    /**
+     * This user's profile.
+     * 
+     * @return HasOne
+     */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class, 'user_id');
     }
 }

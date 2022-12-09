@@ -21,11 +21,15 @@ export default function useStyles() {
                 marginLeft: `${drawerWidth}px`,
                 height: `${appbarHeight}px`,
                 boxShadow: '0px 3px 20px 0px rgba(0,0,0,0.2)',
+                // Ensure the z-index is below that of the Inertia.js progress bar.
+                zIndex: 1000,
             },
 
             appBarMd: {
                 width: '100%',
                 boxShadow: '0px 3px 20px 0px rgba(0,0,0,0.2)',
+                // Ensure the z-index is below that of the Inertia.js progress bar.
+                zIndex: 1000,
             },
 
             appbarTitle: {
@@ -51,6 +55,8 @@ export default function useStyles() {
                 flexDirection: 'column',
                 borderRight: 'none',
                 overflow: 'visible',
+                // Ensure the drawer z-index is below that of the Inertia.js progress bar.
+                zIndex: 1001,
             },
 
             drawerListContainer: {
@@ -60,6 +66,7 @@ export default function useStyles() {
                 boxShadow: '3px 0px 20px 0px rgba(0,0,0,0.1)',
                 flexDirection: 'column',
                 alignItems: 'center',
+                paddingTop: '10px',
             },
 
             drawerList: {
@@ -101,6 +108,10 @@ export default function useStyles() {
 
             drawerItemText: {
                 color: SECONDARY,
+            },
+
+            drawerItemTextActive: {
+                color: PRIMARY,
             },
 
             innerContentContainer: {

@@ -4,11 +4,10 @@ namespace App\Actions\Home;
 
 use App\Models\Competition;
 use App\Models\TeamVenue;
-use App\Models\Venue;
 
 use Auth;
 
-class ObtainHomeDataAction
+class HomeAction
 {
     /**
      * Obtain data for the home screen to display.
@@ -27,14 +26,12 @@ class ObtainHomeDataAction
             ->where('is_current', true)
             ->with('venue')
             ->get()
-            ->map(fn ($tv) => $tv->venue->id)
-            ->toArray();
+            ->map(fn ($tv) => $tv->venue->id);
 
         $userVisits = Auth::user()->visits;
 
-        $userEnglishVenueVisits = $userVisits
-            ->map(fn ($v) => $v->venue)
-            ->filter(fn ($v) => in_array($v->id, $englishVenuesIds))
+        $userEnglishVenueVisits = $userVisits->map(fn ($v) => $v->venue->id)
+            ->intersect($englishVenuesIds)
             ->count();
 
         return [

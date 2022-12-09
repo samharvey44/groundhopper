@@ -85,4 +85,14 @@ class Team extends Model
     {
         return $this->hasMany(Visit::class, 'away_team_id');
     }
+
+    /**
+     * The profiles that support this team.
+     * 
+     * @return HasMany
+     */
+    public function supportingProfiles(): HasMany
+    {
+        return $this->hasMany(Profile::class, 'supported_team_id');
+    }
 }
