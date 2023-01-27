@@ -1,8 +1,8 @@
 import { responsiveFontSizes } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
-import { Inertia } from '@inertiajs/inertia';
 import { ThemeProvider } from '@mui/system';
+import { router } from '@inertiajs/react';
 import React from 'react';
 
 import { PRIMARY, SECONDARY } from './globals/colors';
@@ -24,7 +24,7 @@ const Main = ({ children }: { children: React.ReactNode }) => {
     window.addEventListener('popstate', (event) => {
         event.stopImmediatePropagation();
 
-        Inertia.reload({
+        router.reload({
             preserveState: false,
             preserveScroll: false,
             replace: true,

@@ -21,7 +21,7 @@ import {
     Menu,
     Person,
 } from '@mui/icons-material';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
 
@@ -57,7 +57,7 @@ const Container: React.FC<IProps> = ({
                     variant: 'success',
                 });
 
-                Inertia.visit('/login');
+                router.visit('/login');
             })
             .catch(() => {
                 enqueueSnackbar('Failed to logout!', {
@@ -128,7 +128,7 @@ const Container: React.FC<IProps> = ({
                                             sx={styles.listItemButton}
                                             onClick={() => {
                                                 if (!isCurrentPath) {
-                                                    Inertia.visit(endpoint);
+                                                    router.visit(endpoint);
                                                 }
                                             }}
                                         >

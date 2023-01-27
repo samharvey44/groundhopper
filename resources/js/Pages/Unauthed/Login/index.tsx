@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, TextField, Typography } from '@mui/material';
 import { LoginTwoTone } from '@mui/icons-material';
-import { Link } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useFormik } from 'formik';
 import React from 'react';
 
@@ -19,7 +19,7 @@ const Login: React.FC = (): JSX.Element => {
         onSubmit: (values) => {
             const { email, password, rememberMe } = values;
 
-            Inertia.post('/login', {
+            router.post('/login', {
                 email,
                 password,
                 rememberMe,

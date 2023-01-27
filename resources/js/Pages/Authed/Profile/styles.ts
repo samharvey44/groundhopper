@@ -32,8 +32,9 @@ export default function useStyles() {
 
             displayName: {
                 marginTop: '10px',
+                textAlign: 'center',
             },
         }),
-        [isMd],
+        [],
     );
 }

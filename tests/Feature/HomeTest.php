@@ -21,7 +21,7 @@ class HomeTest extends TestCase
      * 
      * @return void
      */
-    public function test_auth_user_has_correct_homescreen(): void
+    public function test_auth_user_has_correct_homescreen_data(): void
     {
         // TODO
     }

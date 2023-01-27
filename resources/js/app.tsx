@@ -1,6 +1,5 @@
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { createInertiaApp } from '@inertiajs/inertia-react';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 import React from 'react';
 
@@ -31,6 +30,7 @@ createInertiaApp({
             </Main>,
         );
     },
+    progress: {
+        color: '#87CBAC',
+    },
 });
-
-InertiaProgress.init({ color: '#87CBAC' });

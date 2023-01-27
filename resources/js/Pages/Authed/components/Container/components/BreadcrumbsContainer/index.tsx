@@ -1,8 +1,8 @@
 import { KeyboardDoubleArrowRight } from '@mui/icons-material';
-import { Link, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react';
 import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import React, { Fragment } from 'react';
+import { Box } from '@mui/system';
 
 import { IInertiaProps } from 'app/interfaces';
 import useStyles from './styles';
@@ -10,7 +10,7 @@ import useStyles from './styles';
 const BreadcrumbsContainer: React.FC = (): JSX.Element => {
     const {
         props: { breadcrumbs },
-    } = usePage<IInertiaProps>();
+    } = usePage() as IInertiaProps;
 
     const styles = useStyles();
 

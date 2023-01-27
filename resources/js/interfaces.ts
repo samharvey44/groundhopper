@@ -1,4 +1,4 @@
-import { ErrorBag, Errors, Page, PageProps } from '@inertiajs/inertia';
+import { Page, PageProps, ErrorBag, Errors } from '@inertiajs/core';
 
 import { ERole } from './enums';
 

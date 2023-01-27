@@ -40,7 +40,7 @@ class BreadcrumbService
             'profile' => [
                 self::breadcrumbPartition('Home', route('home'), false),
                 self::breadcrumbPartition('Profile', route('profile'), true),
-            ]
+            ],
         ];
     }
 

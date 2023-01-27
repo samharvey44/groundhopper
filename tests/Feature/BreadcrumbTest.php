@@ -18,17 +18,20 @@ class BreadcrumbTest extends TestCase
      *
      * @return void
      */
-    public function test_breadcrumbs_generate_for_defined_page()
+    public function test_breadcrumbs_generate_correctly()
     {
-        // TODO
+        Auth::login($this->createTestUser());
 
-        // Auth::login($this->createTestUser());
-
-        // $this->get(route('profile'))
-        //     ->assertStatus(200)
-        //     ->assertInertia(function (AssertableInertia $page) {
-        //         return $page->component('Authed/Profile', false)
-        //             ->has('breadcrumbs');
-        //     });
+        $this->get(route('profile'))
+            ->assertStatus(200)
+            ->assertInertia(function (AssertableInertia $page) {
+                return $page->component('Authed/Profile', false)
+                    ->where('breadcrumbs.0.name', 'Home')
+                    ->where('breadcrumbs.0.url', route('home'))
+                    ->where('breadcrumbs.0.isActive', false)
+                    ->where('breadcrumbs.1.name', 'Profile')
+                    ->where('breadcrumbs.1.url', route('profile'))
+                    ->where('breadcrumbs.1.isActive', true);
+            });
     }
 }

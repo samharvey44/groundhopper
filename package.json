@@ -8,9 +8,6 @@
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
-        "@inertiajs/inertia": "^0.11.0",
-        "@inertiajs/inertia-react": "^0.8.1",
-        "@inertiajs/progress": "^0.2.7",
         "@tailwindcss/forms": "^0.5.3",
         "@types/node": "^18.11.9",
         "@types/react-dom": "^18.0.8",
@@ -36,6 +33,7 @@
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "@fontsource/roboto": "^4.5.8",
+        "@inertiajs/react": "^1.0.0",
         "@mui/icons-material": "^5.10.9",
         "@mui/material": "^5.10.12",
         "formik": "^2.2.9",

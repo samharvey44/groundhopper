@@ -1,7 +1,6 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { PermIdentity } from '@mui/icons-material';
-import { Link } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
+import { router, Link } from '@inertiajs/react';
 import { useFormik } from 'formik';
 import { Box } from '@mui/system';
 import React from 'react';
@@ -20,7 +19,7 @@ const Signup: React.FC = (): JSX.Element => {
         onSubmit: (values) => {
             const { email, password, confirmPassword } = values;
 
-            Inertia.post('/signup', {
+            router.post('/signup', {
                 email,
                 password,
                 password_confirmation: confirmPassword,
