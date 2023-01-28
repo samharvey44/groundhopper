@@ -10,12 +10,8 @@ import '@fontsource/roboto/700.css';
 
 import Main from './main';
 
-const appName =
-    window.document.getElementsByTagName('title')[0]?.innerText ||
-    'Groundhopper';
-
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: () => 'Groundhopper',
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}/index.tsx`,
