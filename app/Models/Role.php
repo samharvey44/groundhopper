@@ -3,10 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Classes\BaseRoleModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends BaseRoleModel
+class Role extends Model
 {
+    /**
+     * The super admin role.
+     */
+    public const SUPER_ADMIN = 'Super Admin';
+
+    /**
+     * The admin role.
+     */
+    public const ADMIN = 'Admin';
+
+    /**
+     * The user role.
+     */
+    public const USER = 'User';
+
     /**
      * The attributes that are mass assignable.
      *
