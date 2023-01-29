@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 
 Route::middleware('throttle:60,1')->group(function () {
     /*
@@ -42,6 +43,15 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::prefix('/profile')->group(function () {
             Route::get('/', [ProfileController::class, 'index'])->name('profile');
         });
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('/admin')->name('admin.')->middleware('auth.admin')->group(function () {
+        Route::get('/', AdminHomeController::class)->name('home');
     });
 
     /*

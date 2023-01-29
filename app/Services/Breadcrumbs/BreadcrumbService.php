@@ -41,18 +41,22 @@ class BreadcrumbService
                 self::breadcrumbPartition('Home', route('home'), false),
                 self::breadcrumbPartition('Profile', route('profile'), true),
             ],
+
+            'admin.home' => [
+                self::breadcrumbPartition('Admin', route('admin.home'), true),
+            ],
         ];
     }
 
     /**
      * Get the breadcrumbs for the given route url.
      * 
-     * @param string $routeUrl The route to obtain breadcrumbs for.
+     * @param string $route The route to obtain breadcrumbs for.
      * 
      * @return array The breadcrumbs for the given route.
      */
-    public static function getBreadcrumbsFor(string $routeUrl): array
+    public static function getBreadcrumbsFor(string $route): array
     {
-        return self::breadcrumbs()[$routeUrl] ?? [];
+        return self::breadcrumbs()[$route] ?? [];
     }
 }
