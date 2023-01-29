@@ -24,8 +24,8 @@ return new class extends Migration
             $table->date('moved_out')->nullable();
             $table->boolean('is_current');
 
-            $table->foreignIdFor(Team::class);
-            $table->foreignIdFor(Venue::class);
+            $table->foreignIdFor(Team::class)->constrained();
+            $table->foreignIdFor(Venue::class)->constrained();
         });
     }
 

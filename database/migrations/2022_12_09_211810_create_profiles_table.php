@@ -22,8 +22,8 @@ return new class extends Migration
 
             $table->string('display_name')->unique();
 
-            $table->foreignIdFor(Team::class, 'supported_team_id')->nullable();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Team::class, 'supported_team_id')->nullable()->constrained('teams');
+            $table->foreignIdFor(User::class)->constrained();
         });
     }
 

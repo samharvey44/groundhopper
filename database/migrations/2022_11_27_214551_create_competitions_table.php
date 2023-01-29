@@ -25,10 +25,10 @@ return new class extends Migration
             $table->smallInteger('order');
             $table->boolean('active')->default(true);
 
-            $table->foreignIdFor(Country::class)->nullable();
-            $table->foreignIdFor(Continent::class)->nullable();
+            $table->foreignIdFor(Country::class)->nullable()->constrained();
+            $table->foreignIdFor(Continent::class)->nullable()->constrained();
 
-            $table->foreignIdFor(CompetitionType::class);
+            $table->foreignIdFor(CompetitionType::class)->constrained();
         });
     }
 

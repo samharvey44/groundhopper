@@ -26,12 +26,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->tinyInteger('rating')->nullable();
 
-            $table->foreignIdFor(Team::class, 'home_team_id');
-            $table->foreignIdFor(Team::class, 'away_team_id');
+            $table->foreignIdFor(Team::class, 'home_team_id')->constrained('teams');
+            $table->foreignIdFor(Team::class, 'away_team_id')->constrained('teams');
 
-            $table->foreignIdFor(Competition::class);
-            $table->foreignIdFor(Venue::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Competition::class)->constrained();
+            $table->foreignIdFor(Venue::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
         });
     }
 

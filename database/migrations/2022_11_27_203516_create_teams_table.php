@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('is_international')->default(false);
             $table->boolean('active')->default(true);
 
-            $table->foreignIdFor(Country::class);
+            $table->foreignIdFor(Country::class)->constrained();
         });
     }
 

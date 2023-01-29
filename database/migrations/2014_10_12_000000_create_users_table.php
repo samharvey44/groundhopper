@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->useCurrent()->nullable();
             $table->string('password');
 
-            $table->foreignIdFor(Role::class);
+            $table->foreignIdFor(Role::class)->constrained();
 
             $table->rememberToken();
             $table->timestamps();

@@ -19,8 +19,8 @@ return new class extends Migration
         Schema::create('competition_teams', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Competition::class);
-            $table->foreignIdFor(Team::class);
+            $table->foreignIdFor(Competition::class)->constrained();
+            $table->foreignIdFor(Team::class)->constrained();
         });
     }
 

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->smallInteger('order');
 
-            $table->foreignIdFor(Continent::class);
+            $table->foreignIdFor(Continent::class)->constrained();
         });
     }
 
