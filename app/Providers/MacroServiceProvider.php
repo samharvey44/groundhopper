@@ -8,7 +8,6 @@ use PHPUnit\Framework\Assert as PHPUnit;
 use Illuminate\Support\ServiceProvider;
 
 use App\Services\Breadcrumbs\BreadcrumbService;
-use Log;
 
 class MacroServiceProvider extends ServiceProvider
 {
