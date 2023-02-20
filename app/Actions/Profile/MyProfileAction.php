@@ -6,7 +6,7 @@ use App\Http\Resources\ProfileResource;
 
 use Auth;
 
-class IndexAction
+class MyProfileAction
 {
     /**
      * Obtain data for the profile screen to display.
